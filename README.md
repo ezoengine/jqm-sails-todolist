@@ -1,2 +1,5 @@
-# jqm-sails-todolist
-### a Sails application
+==================
+jqm-sails-todolist
+==================
+
+ToDoList = JQueryMobile + Sails
