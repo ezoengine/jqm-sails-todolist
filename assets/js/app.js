@@ -6,10 +6,19 @@
  *
  * Feel free to change none, some, or ALL of this file to fit your needs!
  */
-
+function renderList(){
+    socket.request('/item',function(items){
+      var title = $('#list :first-child')[0].outerHTML;
+      $('#list').html(title);
+      $(items).each(function(idx,item){
+        $('#list').append('<li>'+item.name+"</li>");
+      });
+      $('#list').listview('refresh');
+    });
+};
 
 (function (io) {
-
+  
   // as soon as this file is loaded, connect automatically, 
   var socket = io.connect();
   if (typeof console !== 'undefined') {
@@ -17,18 +26,9 @@
   }
 
   socket.on('connect', function socketConnected() {
-
-    // Listen for Comet messages from Sails
+    renderList();
     socket.on('message', function messageReceived(message) {
-
-      ///////////////////////////////////////////////////////////
-      // Replace the following with your own custom logic
-      // to run when a new message arrives from the Sails.js
-      // server.
-      ///////////////////////////////////////////////////////////
-      log('New comet message received :: ', message);
-      //////////////////////////////////////////////////////
-
+      renderList();
     });
 
 
