@@ -17,6 +17,15 @@ function renderList(){
     });
 };
 
+// remove Item
+$('#list').on('click',function(e){
+  var text = $(e.target).text();
+  socket.request('/item/find?name='+text,{},function(items){
+    socket.request('/item/destroy/'+items[0].id);
+  });
+});
+
+
 (function (io) {
   
   // as soon as this file is loaded, connect automatically, 
