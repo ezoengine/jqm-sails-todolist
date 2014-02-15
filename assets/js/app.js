@@ -25,6 +25,15 @@ $('#list').on('click',function(e){
   });
 });
 
+// add Item
+$('#item').on('keypress',function(e){
+  if(e.which==13){
+      var text = $('#item').val();
+      socket.request('/item/create?name='+text,function(){
+        $('#item').val('');
+      });
+  }
+});
 
 (function (io) {
   
